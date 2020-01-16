@@ -48,11 +48,11 @@
             // zombieBox
             // 
             this.zombieBox.BackColor = System.Drawing.Color.Transparent;
-            this.zombieBox.BackgroundImage = global::GameTemplateTest.Properties.Resources.zombie1Left;
+            this.zombieBox.BackgroundImage = global::GameTemplateTest.Properties.Resources.Zombie_Shirt_left;
             this.zombieBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.zombieBox.Location = new System.Drawing.Point(338, 405);
+            this.zombieBox.Location = new System.Drawing.Point(338, 457);
             this.zombieBox.Name = "zombieBox";
-            this.zombieBox.Size = new System.Drawing.Size(100, 163);
+            this.zombieBox.Size = new System.Drawing.Size(100, 111);
             this.zombieBox.TabIndex = 5;
             this.zombieBox.TabStop = false;
             // 
@@ -68,7 +68,7 @@
             // heroBox
             // 
             this.heroBox.BackColor = System.Drawing.Color.Transparent;
-            this.heroBox.BackgroundImage = global::GameTemplateTest.Properties.Resources.marcoLeft;
+            this.heroBox.BackgroundImage = global::GameTemplateTest.Properties.Resources.marco_left;
             this.heroBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.heroBox.Location = new System.Drawing.Point(0, 419);
             this.heroBox.Name = "heroBox";

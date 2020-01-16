@@ -56,7 +56,7 @@ namespace GravityTest
             heroX = 10;
             heroY = 419;
             zombieX = 338;
-            zombieY = 405;
+            zombieY = 457;
             heroWidth = 100;
             heroSpeed = 10;
             jumpHeight = 20;
@@ -111,7 +111,7 @@ namespace GravityTest
                     break;
                 case Keys.Space:
                     spaceDown = true;
-                    if (bulletDelayWatch.ElapsedMilliseconds >= 500)
+                    if (bulletDelayWatch.ElapsedMilliseconds >= 2000)
                     {
                         shot = true;
                         bulletDelayWatch.Stop();
