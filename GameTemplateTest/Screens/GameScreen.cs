@@ -34,12 +34,10 @@ namespace GravityTest
         Random randGen = new Random();
         int jumpCounter = -1;
         string direction = "right";
-        //PictureBox zombieBox = new PictureBox();
         SoundPlayer song = new SoundPlayer(GameTemplateTest.Properties.Resources.fightMusic);
-        //TODO create your global game variables here
         int heroX, heroY, heroWidth, heroSpeed, jumpHeight, bulletX, bulletY, bulletSpeed, bullets, heroHealth;
         int zombieY;
-        int location;
+        int movement;
         List<int> zombieX = new List<int>();
         List<int> zombSpeed = new List<int>();
         List<PictureBox> zombieBox = new List<PictureBox>();
@@ -48,32 +46,77 @@ namespace GravityTest
         public GameScreen()
         {
             InitializeComponent();
-            location = 0;
+            InitializeGameValues();
+        }
+
+        public void InitializeGameValues()
+        {
+            //TODO - setup all your initial game values here. Use this method
+            // each time you restart your game to reset all values.
+            heroX = 0;
+            heroY = 419;
+            zombieY = 457;
+            heroWidth = 100;
+            heroSpeed = 10;
+            jumpHeight = 20;
+            bulletSpeed = 25;
+            bulletX = this.Width;
+            bulletY = this.Height;
+            bullets = 30;
+            bulletDelayWatch.Start();
+            heroHealth = 5;
+            movement = 0;
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
                 switch (MainForm.levelDifficult)
                 {
                     case "Easy":
-                        switch (randGen.Next(2, 5))
+                        switch (randGen.Next(3, 6))
                         {
-                            case 2:
-                                zombSpeed[i].Add(2);
-                                break;
                             case 3:
-                                zombSpeed[i].Add(3);
+                                zombSpeed.Insert(i, 3);
                                 break;
                             case 4:
-                                zombSpeed[i].Add(4);
+                                zombSpeed.Insert(i, 4);
+                                break;
+                            case 5:
+                                zombSpeed.Insert(i, 5);
                                 break;
                             default:
                                 break;
                         }
                         break;
                     case "Medium":
-                        zombSpeed.Add(i);
+                        switch (randGen.Next(5, 8))
+                        {
+                            case 5:
+                                zombSpeed.Insert(i, 5);
+                                break;
+                            case 6:
+                                zombSpeed.Insert(i, 6);
+                                break;
+                            case 7:
+                                zombSpeed.Insert(i, 7);
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     case "Hard":
-                        zombSpeed.Add(i);
+                        switch (randGen.Next(7, 10))
+                        {
+                            case 7:
+                                zombSpeed.Insert(i, 7);
+                                break;
+                            case 8:
+                                zombSpeed.Insert(i, 8);
+                                break;
+                            case 9:
+                                zombSpeed.Insert(i, 9);
+                                break;
+                            default:
+                                break;
+                        }
                         break;
                     default:
                         break;
@@ -81,13 +124,18 @@ namespace GravityTest
             }
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                zombieX.Add(this.Width + location);
-                location = location + 150;
+                zombieX.Add(this.Width + movement);
+                movement = movement + 150;
             }
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
+                PictureBox zombieBox1 = new PictureBox();
                 zombieBox[i].Location = new Point(zombieX[i], 457);
                 zombieBox[i].Size = new Size(100, 110);
+                zombieBox.Insert(i, zombieBox1);
+            }
+            for (int i = 0; i <= MainForm.zombCount; i++)
+            {
                 switch (randGen.Next(1, 3))
                 {
                     case 1:
@@ -102,26 +150,6 @@ namespace GravityTest
                 zombieBox[i].BackgroundImageLayout = ImageLayout.Zoom;
                 this.Controls.Add(zombieBox[i]);
             }
-            InitializeGameValues();
-        }
-
-        public void InitializeGameValues()
-        {
-            //TODO - setup all your initial game values here. Use this method
-            // each time you restart your game to reset all values.
-            heroX = 0;
-            heroY = 419;
-            //zombieX = 1444;
-            zombieY = 457;
-            heroWidth = 100;
-            heroSpeed = 10;
-            jumpHeight = 20;
-            bulletSpeed = 25;
-            bulletX = this.Width;
-            bulletY = this.Height;
-            bullets = 30;
-            bulletDelayWatch.Start();
-            heroHealth = 5;
             Thread.Sleep(5000);
         }
 

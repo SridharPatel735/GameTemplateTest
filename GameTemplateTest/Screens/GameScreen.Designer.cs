@@ -104,11 +104,11 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImage = global::GameTemplateTest.Properties.Resources.cityBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Controls.Add(this.youDiedLabel);
-            this.Controls.Add(this.deathLabel);
             this.Controls.Add(this.heroBox);
             this.Controls.Add(this.bulletLabel);
             this.Controls.Add(this.bulletBox);
+            this.Controls.Add(this.deathLabel);
+            this.Controls.Add(this.youDiedLabel);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GameScreen";
