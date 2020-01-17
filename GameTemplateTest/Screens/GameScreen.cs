@@ -127,15 +127,14 @@ namespace GravityTest
                 zombieX.Add(this.Width + movement);
                 movement = movement + 150;
             }
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
                 PictureBox zombieBox1 = new PictureBox();
+                zombieBox.Insert(i, zombieBox1);
                 zombieBox[i].Location = new Point(zombieX[i], 457);
                 zombieBox[i].Size = new Size(100, 110);
-                zombieBox.Insert(i, zombieBox1);
-            }
-            for (int i = 0; i <= MainForm.zombCount; i++)
-            {
                 switch (randGen.Next(1, 3))
                 {
                     case 1:
@@ -150,6 +149,8 @@ namespace GravityTest
                 zombieBox[i].BackgroundImageLayout = ImageLayout.Zoom;
                 this.Controls.Add(zombieBox[i]);
             }
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             Thread.Sleep(5000);
         }
 
@@ -409,7 +410,7 @@ namespace GravityTest
                 {
                     zombieX[i] = zombieX[i] - MainForm.zombSpeed;
                 }
-                else if (zombieX[i] < heroX)
+                else 
                 {
                     zombieX[i] = zombieX[i] + MainForm.zombSpeed;
                 }
