@@ -13,7 +13,6 @@ namespace GameTemplateTest
 {
     public partial class DifficultySetting : UserControl
     {
-        SoundPlayer song = new SoundPlayer(Properties.Resources.fightMusic);
 
 
         public DifficultySetting()

@@ -11,6 +11,7 @@ using System.Threading;
 using GameSystemServices;
 using System.Diagnostics;
 using GameTemplateTest;
+using System.Media;
 /// <summary>
 /// Created by Sridhar, Calem, and Sammy
 /// January 2020
@@ -30,9 +31,11 @@ namespace GravityTest
         Boolean shot = false;
         Stopwatch reloadWatch = new Stopwatch();
         Stopwatch bulletDelayWatch = new Stopwatch();
+        Random randGen = new Random();
         int jumpCounter = -1;
         string direction = "right";
-        //PictureBox pb = new PictureBox();
+        PictureBox zombieBox = new PictureBox();
+        SoundPlayer song = new SoundPlayer(GameTemplateTest.Properties.Resources.fightMusic);
         //TODO create your global game variables here
         int heroX, heroY, heroWidth, heroSpeed, jumpHeight, bulletX, bulletY, bulletSpeed, bullets, heroHealth;
         int zombieX, zombieY;
@@ -41,11 +44,23 @@ namespace GravityTest
         public GameScreen()
         {
             InitializeComponent();
-            //pb.Location = new Point(20, 20);
-            //pb.Size = new Size(100, 200);
-            //pb.BackColor = Color.Red;
-            //this.Controls.Add(pb);
+            zombieBox.Location = new Point(1444, 457);
+            zombieBox.Size = new Size(100, 110);
+            zombieBox.BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_Shirt_left;
+            zombieBox.BackgroundImageLayout = ImageLayout.Zoom;
+            this.Controls.Add(zombieBox);
 
+            switch (randGen.Next(1, 3))
+            {
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+                default:
+                    break;
+            }
             InitializeGameValues();
         }
 
@@ -53,9 +68,9 @@ namespace GravityTest
         {
             //TODO - setup all your initial game values here. Use this method
             // each time you restart your game to reset all values.
-            heroX = 10;
+            heroX = 0;
             heroY = 419;
-            zombieX = 338;
+            zombieX = 1444;
             zombieY = 457;
             heroWidth = 100;
             heroSpeed = 10;
@@ -111,7 +126,7 @@ namespace GravityTest
                     break;
                 case Keys.Space:
                     spaceDown = true;
-                    if (bulletDelayWatch.ElapsedMilliseconds >= 2000)
+                    if (bulletDelayWatch.ElapsedMilliseconds >= 1900)
                     {
                         shot = true;
                         bulletDelayWatch.Stop();
@@ -301,11 +316,10 @@ namespace GravityTest
             Rectangle heroRec = new Rectangle(heroX, heroY, 100, 163);
             if (zombieRec.IntersectsWith(bulletRec))
             {
-                //pb.Dispose();
+                zombieBox.Dispose();
                 bulletX = this.Width;
-                zombieX = this.Width;
-                zombieBox.Location = new Point(zombieX, 163);
-                zombieRec.Location = new Point(zombieX, 163);
+                //zombieX = this.Width;
+                zombieRec.Location = new Point(this.Width, 163);
             }
             if (heroRec.IntersectsWith(zombieRec))
             {
@@ -334,7 +348,22 @@ namespace GravityTest
             //Checks the hero's health
             if (heroHealth == 0)
             {
-                Thread.Sleep(1000);
+                //heroBox.BackgroundImage = GameTemplateTest.Properties.Resources.marco_dead;
+                deathLabel.Visible = true;
+                for (int i = 0; i <= 256; i = i + 5)
+                {
+                    deathLabel.BackColor = Color.FromArgb(i, 0, 0, 0);
+                    //heroBox.BackColor = Color.FromArgb(i, 0, 0, 0);
+                    Thread.Sleep(50);
+                    Refresh();
+                }
+                youDiedLabel.Visible = true;
+                for (int i = 0; i <= 256; i = i + 5)
+                {
+                    youDiedLabel.ForeColor = Color.FromArgb(i, 255, 0, 0);
+                    Thread.Sleep(50);
+                    Refresh();
+                }
                 Application.Exit();
             }
         }

@@ -132,6 +132,16 @@ namespace GameTemplateTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Pixel_Bullet {
+            get {
+                object obj = ResourceManager.GetObject("Pixel_Bullet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Zombie_coat_left {
             get {
                 object obj = ResourceManager.GetObject("Zombie_coat_left", resourceCulture);
