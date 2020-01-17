@@ -34,32 +34,73 @@ namespace GravityTest
         Random randGen = new Random();
         int jumpCounter = -1;
         string direction = "right";
-        PictureBox zombieBox = new PictureBox();
+        //PictureBox zombieBox = new PictureBox();
         SoundPlayer song = new SoundPlayer(GameTemplateTest.Properties.Resources.fightMusic);
         //TODO create your global game variables here
         int heroX, heroY, heroWidth, heroSpeed, jumpHeight, bulletX, bulletY, bulletSpeed, bullets, heroHealth;
-        int zombieX, zombieY;
+        int zombieY;
+        int location;
+        List<int> zombieX = new List<int>();
+        List<int> zombSpeed = new List<int>();
+        List<PictureBox> zombieBox = new List<PictureBox>();
 
 
         public GameScreen()
         {
             InitializeComponent();
-            zombieBox.Location = new Point(1444, 457);
-            zombieBox.Size = new Size(100, 110);
-            zombieBox.BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_Shirt_left;
-            zombieBox.BackgroundImageLayout = ImageLayout.Zoom;
-            this.Controls.Add(zombieBox);
-
-            switch (randGen.Next(1, 3))
+            location = 0;
+            for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
-                default:
-                    break;
+                switch (MainForm.levelDifficult)
+                {
+                    case "Easy":
+                        switch (randGen.Next(2, 5))
+                        {
+                            case 2:
+                                zombSpeed[i].Add(2);
+                                break;
+                            case 3:
+                                zombSpeed[i].Add(3);
+                                break;
+                            case 4:
+                                zombSpeed[i].Add(4);
+                                break;
+                            default:
+                                break;
+                        }
+                        break;
+                    case "Medium":
+                        zombSpeed.Add(i);
+                        break;
+                    case "Hard":
+                        zombSpeed.Add(i);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            for (int i = 0; i <= MainForm.zombCount; i++)
+            {
+                zombieX.Add(this.Width + location);
+                location = location + 150;
+            }
+            for (int i = 0; i <= MainForm.zombCount; i++)
+            {
+                zombieBox[i].Location = new Point(zombieX[i], 457);
+                zombieBox[i].Size = new Size(100, 110);
+                switch (randGen.Next(1, 3))
+                {
+                    case 1:
+                        zombieBox[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_coat_left;
+                        break;
+                    case 2:
+                        zombieBox[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_Shirt_left;
+                        break;
+                    default:
+                        break;
+                }
+                zombieBox[i].BackgroundImageLayout = ImageLayout.Zoom;
+                this.Controls.Add(zombieBox[i]);
             }
             InitializeGameValues();
         }
@@ -70,7 +111,7 @@ namespace GravityTest
             // each time you restart your game to reset all values.
             heroX = 0;
             heroY = 419;
-            zombieX = 1444;
+            //zombieX = 1444;
             zombieY = 457;
             heroWidth = 100;
             heroSpeed = 10;
@@ -311,36 +352,41 @@ namespace GravityTest
         public void CollisionCheck()
         {
             //TODO collisions checks 
-            Rectangle zombieRec = new Rectangle(zombieX, zombieY, 100, 163);
             Rectangle bulletRec = new Rectangle(bulletX, bulletY, 19, 19);
             Rectangle heroRec = new Rectangle(heroX, heroY, 100, 163);
-            if (zombieRec.IntersectsWith(bulletRec))
+
+            for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                zombieBox.Dispose();
-                bulletX = this.Width;
-                //zombieX = this.Width;
-                zombieRec.Location = new Point(this.Width, 163);
-            }
-            if (heroRec.IntersectsWith(zombieRec))
-            {
-                heroHealth--;
-                zombieX = zombieX + 200;
-                zombieBox.Location = new Point(zombieX, 163);
-                zombieRec.Location = new Point(zombieX, 163);
+                Rectangle zombieRec = new Rectangle(zombieX[i], zombieY, 100, 163);
+                if (zombieRec.IntersectsWith(bulletRec))
+                {
+                    zombieBox[i].Dispose();
+                    bulletX = this.Width;
+                }
+                if (heroRec.IntersectsWith(zombieRec))
+                {
+                    heroHealth--;
+                    zombieX[i] = zombieX[i] + 200;
+                    zombieBox[i].Location = new Point(zombieX[i], 163);
+                    zombieRec.Location = new Point(zombieX[i], 163);
+                }
             }
         }
         public void NPCMove()
         {
             //TODO move npc characters
-            if (zombieX > heroX)
+            for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                zombieX = zombieX - MainForm.zombSpeed;
+                if (zombieX[i] > heroX)
+                {
+                    zombieX[i] = zombieX[i] - MainForm.zombSpeed;
+                }
+                else if (zombieX[i] < heroX)
+                {
+                    zombieX[i] = zombieX[i] + MainForm.zombSpeed;
+                }
+                zombieBox[i].Location = new Point(zombieX[i], zombieY);
             }
-            else if (zombieX < heroX)
-            {
-                zombieX = zombieX + MainForm.zombSpeed;
-            }
-            zombieBox.Location = new Point(zombieX, zombieY);
         }
 
         public void HeroHealthCheck()

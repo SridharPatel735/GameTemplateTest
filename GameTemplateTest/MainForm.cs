@@ -17,6 +17,7 @@ namespace GameTemplateTest
         bool fullScreen = true;  // true: program runs fullscreen || false: program runs in window
         public static int zombCount;
         public static int zombSpeed;
+        public static string levelDifficult;
         public static int level;
         public MainForm()
         {
