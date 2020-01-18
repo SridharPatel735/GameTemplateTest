@@ -40,7 +40,7 @@ namespace GravityTest
         int movement;
         List<int> zombieX = new List<int>();
         List<int> zombSpeed = new List<int>();
-        List<PictureBox> zombieBox = new List<PictureBox>();
+        List<PictureBox> zombieList = new List<PictureBox>();
 
 
         public GameScreen()
@@ -66,6 +66,15 @@ namespace GravityTest
             bulletDelayWatch.Start();
             heroHealth = 5;
             movement = 0;
+            switch(randGen.Next(1,3))
+            {
+                case 1:
+                    this.BackgroundImage = GameTemplateTest.Properties.Resources.cityBackground;
+                    break;
+                case 2:
+                    this.BackgroundImage = GameTemplateTest.Properties.Resources.JungleBackground;
+                    break;
+            } 
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
                 switch (MainForm.levelDifficult)
@@ -74,15 +83,13 @@ namespace GravityTest
                         switch (randGen.Next(3, 6))
                         {
                             case 3:
-                                zombSpeed.Insert(i, 3);
+                                zombSpeed.Add(3);
                                 break;
                             case 4:
-                                zombSpeed.Insert(i, 4);
+                                zombSpeed.Add(4);
                                 break;
                             case 5:
-                                zombSpeed.Insert(i, 5);
-                                break;
-                            default:
+                                zombSpeed.Add(5);
                                 break;
                         }
                         break;
@@ -90,15 +97,13 @@ namespace GravityTest
                         switch (randGen.Next(5, 8))
                         {
                             case 5:
-                                zombSpeed.Insert(i, 5);
+                                zombSpeed.Add(5);
                                 break;
                             case 6:
-                                zombSpeed.Insert(i, 6);
+                                zombSpeed.Add(6);
                                 break;
                             case 7:
-                                zombSpeed.Insert(i, 7);
-                                break;
-                            default:
+                                zombSpeed.Add(7);
                                 break;
                         }
                         break;
@@ -106,48 +111,43 @@ namespace GravityTest
                         switch (randGen.Next(7, 10))
                         {
                             case 7:
-                                zombSpeed.Insert(i, 7);
+                                zombSpeed.Add(7);
                                 break;
                             case 8:
-                                zombSpeed.Insert(i, 8);
+                                zombSpeed.Add(8);
                                 break;
                             case 9:
-                                zombSpeed.Insert(i, 9);
-                                break;
-                            default:
+                                zombSpeed.Add(9);
                                 break;
                         }
-                        break;
-                    default:
                         break;
                 }
             }
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                zombieX.Add(this.Width + movement);
+                zombieX.Add(450 + movement);
                 movement = movement + 150;
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                PictureBox zombieBox1 = new PictureBox();
-                zombieBox.Insert(i, zombieBox1);
-                zombieBox[i].Location = new Point(zombieX[i], 457);
-                zombieBox[i].Size = new Size(100, 110);
+                PictureBox zombieBox = new PictureBox();
+                zombieBox.Location = new Point(zombieX[i], 457);
+                zombieBox.Size = new Size(100, 110);
+                zombieBox.Visible = true;
                 switch (randGen.Next(1, 3))
                 {
                     case 1:
-                        zombieBox[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_coat_left;
+                        zombieBox.BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_coat_left;
                         break;
                     case 2:
-                        zombieBox[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_Shirt_left;
-                        break;
-                    default:
+                        zombieBox.BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_Shirt_left;
                         break;
                 }
-                zombieBox[i].BackgroundImageLayout = ImageLayout.Zoom;
-                this.Controls.Add(zombieBox[i]);
+                zombieBox.BackgroundImageLayout = ImageLayout.Zoom;
+                this.Controls.Add(zombieBox);
+                zombieList.Add(zombieBox);
             }
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -381,23 +381,19 @@ namespace GravityTest
         public void CollisionCheck()
         {
             //TODO collisions checks 
-            Rectangle bulletRec = new Rectangle(bulletX, bulletY, 19, 19);
-            Rectangle heroRec = new Rectangle(heroX, heroY, 100, 163);
-
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                Rectangle zombieRec = new Rectangle(zombieX[i], zombieY, 100, 163);
-                if (zombieRec.IntersectsWith(bulletRec))
+                if (zombieList[i].Bounds.IntersectsWith(bulletBox.Bounds))
                 {
-                    zombieBox[i].Dispose();
+                    //zombieList[i].Dispose();
+                    zombieList[i].Dispose();
                     bulletX = this.Width;
                 }
-                if (heroRec.IntersectsWith(zombieRec))
+                if (heroBox.Bounds.IntersectsWith(zombieList[i].Bounds))
                 {
                     heroHealth--;
                     zombieX[i] = zombieX[i] + 200;
-                    zombieBox[i].Location = new Point(zombieX[i], 163);
-                    zombieRec.Location = new Point(zombieX[i], 163);
+                    zombieList[i].Location = new Point(zombieX[i], 163);
                 }
             }
         }
@@ -408,13 +404,13 @@ namespace GravityTest
             {
                 if (zombieX[i] > heroX)
                 {
-                    zombieX[i] = zombieX[i] - MainForm.zombSpeed;
+                    zombieX[i] = zombieX[i] - zombSpeed[i];
                 }
                 else 
                 {
-                    zombieX[i] = zombieX[i] + MainForm.zombSpeed;
+                    zombieX[i] = zombieX[i] + zombSpeed[i];
                 }
-                zombieBox[i].Location = new Point(zombieX[i], zombieY);
+                zombieList[i].Location = new Point(zombieX[i], zombieY);
             }
         }
 

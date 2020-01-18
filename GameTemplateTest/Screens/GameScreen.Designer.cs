@@ -91,10 +91,10 @@
             // 
             // deathLabel
             // 
-            this.deathLabel.Location = new System.Drawing.Point(-13, -14);
+            this.deathLabel.Location = new System.Drawing.Point(-16, -17);
             this.deathLabel.Name = "deathLabel";
             this.deathLabel.Size = new System.Drawing.Size(1685, 640);
-            this.deathLabel.TabIndex = 12;
+            this.deathLabel.TabIndex = 15;
             this.deathLabel.Visible = false;
             // 
             // GameScreen
@@ -102,13 +102,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.BackgroundImage = global::GameTemplateTest.Properties.Resources.cityBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Controls.Add(this.deathLabel);
+            this.Controls.Add(this.youDiedLabel);
             this.Controls.Add(this.heroBox);
             this.Controls.Add(this.bulletLabel);
             this.Controls.Add(this.bulletBox);
-            this.Controls.Add(this.deathLabel);
-            this.Controls.Add(this.youDiedLabel);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GameScreen";
