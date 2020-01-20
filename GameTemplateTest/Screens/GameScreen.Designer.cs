@@ -45,7 +45,7 @@
             // gameTimer
             // 
             this.gameTimer.Enabled = true;
-            this.gameTimer.Interval = 15;
+            this.gameTimer.Interval = 20;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
             // bulletBox
@@ -62,7 +62,7 @@
             // heroBox
             // 
             this.heroBox.BackColor = System.Drawing.Color.Transparent;
-            this.heroBox.BackgroundImage = global::GameTemplateTest.Properties.Resources.marco_left;
+            this.heroBox.BackgroundImage = global::GameTemplateTest.Properties.Resources.marco_right;
             this.heroBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.heroBox.Location = new System.Drawing.Point(0, 419);
             this.heroBox.Name = "heroBox";
@@ -73,9 +73,10 @@
             // bulletLabel
             // 
             this.bulletLabel.AutoSize = true;
-            this.bulletLabel.Location = new System.Drawing.Point(368, 11);
+            this.bulletLabel.Font = new System.Drawing.Font("Mistral", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bulletLabel.Location = new System.Drawing.Point(368, 0);
             this.bulletLabel.Name = "bulletLabel";
-            this.bulletLabel.Size = new System.Drawing.Size(27, 20);
+            this.bulletLabel.Size = new System.Drawing.Size(43, 38);
             this.bulletLabel.TabIndex = 9;
             this.bulletLabel.Text = "30";
             // 
@@ -104,27 +105,30 @@
             // bulletCount
             // 
             this.bulletCount.AutoSize = true;
-            this.bulletCount.Location = new System.Drawing.Point(309, 10);
+            this.bulletCount.Font = new System.Drawing.Font("Mistral", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bulletCount.Location = new System.Drawing.Point(265, -1);
             this.bulletCount.Name = "bulletCount";
-            this.bulletCount.Size = new System.Drawing.Size(61, 20);
+            this.bulletCount.Size = new System.Drawing.Size(97, 38);
             this.bulletCount.TabIndex = 16;
             this.bulletCount.Text = "Bullets:";
             // 
             // healthCount
             // 
             this.healthCount.AutoSize = true;
-            this.healthCount.Location = new System.Drawing.Point(452, 11);
+            this.healthCount.Font = new System.Drawing.Font("Mistral", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.healthCount.Location = new System.Drawing.Point(534, 0);
             this.healthCount.Name = "healthCount";
-            this.healthCount.Size = new System.Drawing.Size(56, 20);
+            this.healthCount.Size = new System.Drawing.Size(82, 38);
             this.healthCount.TabIndex = 17;
             this.healthCount.Text = "Health";
             // 
             // healthLabel
             // 
             this.healthLabel.AutoSize = true;
-            this.healthLabel.Location = new System.Drawing.Point(515, 11);
+            this.healthLabel.Font = new System.Drawing.Font("Mistral", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.healthLabel.Location = new System.Drawing.Point(622, 0);
             this.healthLabel.Name = "healthLabel";
-            this.healthLabel.Size = new System.Drawing.Size(18, 20);
+            this.healthLabel.Size = new System.Drawing.Size(30, 38);
             this.healthLabel.TabIndex = 18;
             this.healthLabel.Text = "5";
             // 
@@ -135,13 +139,13 @@
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.youDiedLabel);
-            this.Controls.Add(this.deathLabel);
             this.Controls.Add(this.healthCount);
             this.Controls.Add(this.healthLabel);
             this.Controls.Add(this.bulletLabel);
             this.Controls.Add(this.bulletCount);
             this.Controls.Add(this.heroBox);
             this.Controls.Add(this.bulletBox);
+            this.Controls.Add(this.deathLabel);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GameScreen";

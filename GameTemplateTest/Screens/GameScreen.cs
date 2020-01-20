@@ -66,15 +66,7 @@ namespace GravityTest
             bulletDelayWatch.Start();
             heroHealth = 5;
             movement = 0;
-            switch(randGen.Next(1,3))
-            {
-                case 1:
-                    this.BackgroundImage = GameTemplateTest.Properties.Resources.JungleBackground;
-                    break;
-                case 2:
-                    this.BackgroundImage = GameTemplateTest.Properties.Resources.JungleBackground;
-                    break;
-            } 
+            this.BackgroundImage = GameTemplateTest.Properties.Resources.JungleBackground;
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
                 switch (MainForm.levelDifficult)
@@ -147,7 +139,7 @@ namespace GravityTest
                 this.Controls.Add(zombieBox);
                 zombieList.Add(zombieBox);
             }
-            Thread.Sleep(5000);
+            //Thread.Sleep(5000);
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -391,10 +383,26 @@ namespace GravityTest
                 if (zombieXList[i] > heroX)
                 {
                     zombieXList[i] = zombieXList[i] - zombSpeedList[i];
+                    if (zombieList[i].BackgroundImage == GameTemplateTest.Properties.Resources.Zombie_coat_right)
+                    {
+                        zombieList[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_coat_left;
+                    }
+                    else if (zombieList[i].BackgroundImage == GameTemplateTest.Properties.Resources.Zombie_Shirt_right)
+                    {
+                        zombieList[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_Shirt_left;
+                    }
                 }
                 else 
                 {
                     zombieXList[i] = zombieXList[i] + zombSpeedList[i];
+                    if (zombieList[i].BackgroundImage == GameTemplateTest.Properties.Resources.Zombie_coat_left)
+                    {
+                        zombieList[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_coat_right;
+                    }
+                    else if (zombieList[i].BackgroundImage == GameTemplateTest.Properties.Resources.Zombie_Shirt_left)
+                    {
+                        zombieList[i].BackgroundImage = GameTemplateTest.Properties.Resources.Zombie_Shirt_right;
+                    }
                 }
                 zombieList[i].Location = new Point(zombieXList[i], zombieY);
             }
@@ -403,25 +411,26 @@ namespace GravityTest
         public void HeroHealthCheck()
         {
             //Checks the hero's health
-            if (heroHealth < 0)
+            if (heroHealth <= 0)
             {
+                youDiedLabel.Visible = true;
+                bulletCount.Visible = false;
+                bulletLabel.Visible = false;
+                healthCount.Visible = false;
+                healthLabel.Visible = false;
+                heroBox.BackgroundImage = GameTemplateTest.Properties.Resources.marco_dead;
                 healthLabel.Text = heroHealth + "";
                 deathLabel.Visible = true;
                 for (int i = 0; i <= 256; i = i + 5)
                 {
                     deathLabel.BackColor = Color.FromArgb(i, 0, 0, 0);
-                    Thread.Sleep(50);
-                    Refresh();
-                }
-                youDiedLabel.Visible = true;
-                for (int i = 0; i <= 256; i = i + 5)
-                {
-                    heroBox.BackgroundImage = GameTemplateTest.Properties.Resources.marco_dead;
-                    //Graphics
                     youDiedLabel.ForeColor = Color.FromArgb(i, 255, 0, 0);
+                    heroBox.BackColor = Color.FromArgb(i, 0, 0, 0);
+                    youDiedLabel.BackColor = Color.FromArgb(i, 0, 0, 0);
                     Thread.Sleep(50);
                     Refresh();
                 }
+                Thread.Sleep(1000);
                 Application.Exit();
             }
         }
