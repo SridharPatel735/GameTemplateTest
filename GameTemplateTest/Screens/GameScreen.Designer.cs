@@ -35,6 +35,9 @@
             this.bulletLabel = new System.Windows.Forms.Label();
             this.youDiedLabel = new System.Windows.Forms.Label();
             this.deathLabel = new System.Windows.Forms.Label();
+            this.bulletCount = new System.Windows.Forms.Label();
+            this.healthCount = new System.Windows.Forms.Label();
+            this.healthLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bulletBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heroBox)).BeginInit();
             this.SuspendLayout();
@@ -70,11 +73,11 @@
             // bulletLabel
             // 
             this.bulletLabel.AutoSize = true;
-            this.bulletLabel.Location = new System.Drawing.Point(366, 11);
+            this.bulletLabel.Location = new System.Drawing.Point(368, 11);
             this.bulletLabel.Name = "bulletLabel";
-            this.bulletLabel.Size = new System.Drawing.Size(51, 20);
+            this.bulletLabel.Size = new System.Drawing.Size(27, 20);
             this.bulletLabel.TabIndex = 9;
-            this.bulletLabel.Text = "label1";
+            this.bulletLabel.Text = "30";
             // 
             // youDiedLabel
             // 
@@ -97,17 +100,47 @@
             this.deathLabel.TabIndex = 15;
             this.deathLabel.Visible = false;
             // 
+            // bulletCount
+            // 
+            this.bulletCount.AutoSize = true;
+            this.bulletCount.Location = new System.Drawing.Point(309, 10);
+            this.bulletCount.Name = "bulletCount";
+            this.bulletCount.Size = new System.Drawing.Size(61, 20);
+            this.bulletCount.TabIndex = 16;
+            this.bulletCount.Text = "Bullets:";
+            // 
+            // healthCount
+            // 
+            this.healthCount.AutoSize = true;
+            this.healthCount.Location = new System.Drawing.Point(452, 11);
+            this.healthCount.Name = "healthCount";
+            this.healthCount.Size = new System.Drawing.Size(56, 20);
+            this.healthCount.TabIndex = 17;
+            this.healthCount.Text = "Health";
+            // 
+            // healthLabel
+            // 
+            this.healthLabel.AutoSize = true;
+            this.healthLabel.Location = new System.Drawing.Point(515, 11);
+            this.healthLabel.Name = "healthLabel";
+            this.healthLabel.Size = new System.Drawing.Size(18, 20);
+            this.healthLabel.TabIndex = 18;
+            this.healthLabel.Text = "5";
+            // 
             // GameScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Controls.Add(this.deathLabel);
             this.Controls.Add(this.youDiedLabel);
-            this.Controls.Add(this.heroBox);
+            this.Controls.Add(this.deathLabel);
+            this.Controls.Add(this.healthLabel);
+            this.Controls.Add(this.healthCount);
             this.Controls.Add(this.bulletLabel);
+            this.Controls.Add(this.bulletCount);
             this.Controls.Add(this.bulletBox);
+            this.Controls.Add(this.heroBox);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GameScreen";
@@ -129,5 +162,8 @@
         private System.Windows.Forms.Label bulletLabel;
         private System.Windows.Forms.Label youDiedLabel;
         private System.Windows.Forms.Label deathLabel;
+        private System.Windows.Forms.Label bulletCount;
+        private System.Windows.Forms.Label healthCount;
+        private System.Windows.Forms.Label healthLabel;
     }
 }

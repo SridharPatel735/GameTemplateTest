@@ -126,7 +126,7 @@ namespace GravityTest
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
                 zombieXList.Add(450 + movement);
-                movement = movement + 150;
+                movement = movement + 100;
             }
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,20 +350,6 @@ namespace GravityTest
             bulletX = bulletX + bulletSpeed;
             bulletBox.Location = new Point(bulletX, bulletY);
 
-
-            if (bullets < 30 && mDown == true)
-            {
-                reloadWatch.Start();
-            }
-
-            if (reloadWatch.ElapsedMilliseconds >= 1000)
-            {
-                reloadWatch.Stop();
-                bullets = 30;
-                bulletLabel.Text = bullets + "";
-                reloadWatch.Reset();
-            }
-
             if (bullets < 30 && mDown == true)
             {
                 reloadWatch.Start();
@@ -386,13 +372,14 @@ namespace GravityTest
                 if (zombieList[i].Bounds.IntersectsWith(bulletBox.Bounds))
                 {
                     zombieList[i].Dispose();
-                    zombSpeedList[i].Dispose();
-                    zombieXList[i].Dispose();
+                    //zombSpeedList[i].Dispose();
+                    //zombieXList[i].Dispose();
                     bulletX = this.Width;
                 }
                 if (heroBox.Bounds.IntersectsWith(zombieList[i].Bounds))
                 {
                     heroHealth--;
+                    healthLabel.Text = heroHealth + "";
                     zombieXList[i] = zombieXList[i] + 200;
                     zombieList[i].Location = new Point(zombieXList[i], 163);
                 }
@@ -421,6 +408,7 @@ namespace GravityTest
             //Checks the hero's health
             if (heroHealth == 0)
             {
+                healthLabel.Text = heroHealth + "";
                 //heroBox.BackgroundImage = GameTemplateTest.Properties.Resources.marco_dead;
                 deathLabel.Visible = true;
                 for (int i = 0; i <= 256; i = i + 5)
