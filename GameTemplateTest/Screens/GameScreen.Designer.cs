@@ -45,7 +45,7 @@
             // gameTimer
             // 
             this.gameTimer.Enabled = true;
-            this.gameTimer.Interval = 20;
+            this.gameTimer.Interval = 15;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
             // bulletBox
@@ -82,6 +82,7 @@
             // youDiedLabel
             // 
             this.youDiedLabel.AutoSize = true;
+            this.youDiedLabel.BackColor = System.Drawing.Color.Black;
             this.youDiedLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.youDiedLabel.Font = new System.Drawing.Font("Mistral", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.youDiedLabel.Location = new System.Drawing.Point(597, 179);
@@ -135,12 +136,12 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.youDiedLabel);
             this.Controls.Add(this.deathLabel);
-            this.Controls.Add(this.healthLabel);
             this.Controls.Add(this.healthCount);
+            this.Controls.Add(this.healthLabel);
             this.Controls.Add(this.bulletLabel);
             this.Controls.Add(this.bulletCount);
-            this.Controls.Add(this.bulletBox);
             this.Controls.Add(this.heroBox);
+            this.Controls.Add(this.bulletBox);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GameScreen";

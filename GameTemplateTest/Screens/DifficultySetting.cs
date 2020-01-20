@@ -23,20 +23,20 @@ namespace GameTemplateTest
         private void easyButton_Click(object sender, EventArgs e)
         {
             MainForm.levelDifficult = "Easy";
-            MainForm.zombCount = 6;
+            MainForm.zombCount = 8;
             MainForm.ChangeScreen(this, "GameScreen");
         }
         private void mediumButton_Click(object sender, EventArgs e)
         {
             MainForm.levelDifficult = "Medium";
-            MainForm.zombCount = 7;
+            MainForm.zombCount = 9;
             MainForm.ChangeScreen(this, "GameScreen");
         }
 
         private void hardButton_Click(object sender, EventArgs e)
         {
             MainForm.levelDifficult = "Hard";
-            MainForm.zombCount = 8;
+            MainForm.zombCount = 10;
             MainForm.ChangeScreen(this, "GameScreen");
         }
 

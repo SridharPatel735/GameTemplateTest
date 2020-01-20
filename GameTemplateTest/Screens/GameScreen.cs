@@ -69,7 +69,7 @@ namespace GravityTest
             switch(randGen.Next(1,3))
             {
                 case 1:
-                    this.BackgroundImage = GameTemplateTest.Properties.Resources.cityBackground;
+                    this.BackgroundImage = GameTemplateTest.Properties.Resources.JungleBackground;
                     break;
                 case 2:
                     this.BackgroundImage = GameTemplateTest.Properties.Resources.JungleBackground;
@@ -125,11 +125,9 @@ namespace GravityTest
             }
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                zombieXList.Add(450 + movement);
+                zombieXList.Add(this.Width + movement);
                 movement = movement + 100;
             }
-
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
                 PictureBox zombieBox = new PictureBox();
@@ -149,9 +147,7 @@ namespace GravityTest
                 this.Controls.Add(zombieBox);
                 zombieList.Add(zombieBox);
             }
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            Thread.Sleep(5000);
+           // Thread.Sleep(5000);
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -249,6 +245,7 @@ namespace GravityTest
             CollisionCheck();
             NPCMove();
             HeroHealthCheck();
+            Refresh();
         }
 
         public void MoveHero()
@@ -367,14 +364,15 @@ namespace GravityTest
         public void CollisionCheck()
         {
             //TODO collisions checks 
-            for (int i = 0; i <= MainForm.zombCount; i++)
+            for (int i = 0; i < zombieXList.Count; i++)
             {
                 if (zombieList[i].Bounds.IntersectsWith(bulletBox.Bounds))
                 {
                     zombieList[i].Dispose();
-                    //zombSpeedList[i].Dispose();
-                    //zombieXList[i].Dispose();
+                    zombSpeedList.RemoveAt(i);
+                    zombieXList.RemoveAt(i);
                     bulletX = this.Width;
+                    break;
                 }
                 if (heroBox.Bounds.IntersectsWith(zombieList[i].Bounds))
                 {
@@ -382,13 +380,14 @@ namespace GravityTest
                     healthLabel.Text = heroHealth + "";
                     zombieXList[i] = zombieXList[i] + 200;
                     zombieList[i].Location = new Point(zombieXList[i], 163);
+                    break;
                 }
             }
         }
         public void NPCMove()
         {
             //TODO move npc characters
-            for (int i = 0; i <= MainForm.zombCount; i++)
+            for (int i = 0; i < zombieXList.Count; i++)
             {
                 if (zombieXList[i] > heroX)
                 {
@@ -399,28 +398,27 @@ namespace GravityTest
                     zombieXList[i] = zombieXList[i] + zombSpeedList[i];
                 }
                 zombieList[i].Location = new Point(zombieXList[i], zombieY);
-                Refresh();
             }
         }
 
         public void HeroHealthCheck()
         {
             //Checks the hero's health
-            if (heroHealth == 0)
+            if (heroHealth < 0)
             {
                 healthLabel.Text = heroHealth + "";
-                //heroBox.BackgroundImage = GameTemplateTest.Properties.Resources.marco_dead;
                 deathLabel.Visible = true;
                 for (int i = 0; i <= 256; i = i + 5)
                 {
                     deathLabel.BackColor = Color.FromArgb(i, 0, 0, 0);
-                    //heroBox.BackColor = Color.FromArgb(i, 0, 0, 0);
                     Thread.Sleep(50);
                     Refresh();
                 }
                 youDiedLabel.Visible = true;
                 for (int i = 0; i <= 256; i = i + 5)
                 {
+                    heroBox.BackgroundImage = GameTemplateTest.Properties.Resources.marco_dead;
+                    //Graphics
                     youDiedLabel.ForeColor = Color.FromArgb(i, 255, 0, 0);
                     Thread.Sleep(50);
                     Refresh();
