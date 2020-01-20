@@ -147,7 +147,7 @@ namespace GravityTest
                 this.Controls.Add(zombieBox);
                 zombieList.Add(zombieBox);
             }
-           // Thread.Sleep(5000);
+            Thread.Sleep(5000);
         }
 
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -360,7 +360,6 @@ namespace GravityTest
                 reloadWatch.Reset();
             }
         }
-
         public void CollisionCheck()
         {
             //TODO collisions checks 
