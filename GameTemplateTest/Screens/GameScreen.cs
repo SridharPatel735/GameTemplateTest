@@ -117,7 +117,7 @@ namespace GravityTest
             }
             for (int i = 0; i <= MainForm.zombCount; i++)
             {
-                zombieXList.Add(this.Width + movement);
+                zombieXList.Add(-300 + movement);
                 movement = movement + 100;
             }
             for (int i = 0; i <= MainForm.zombCount; i++)
@@ -362,7 +362,14 @@ namespace GravityTest
                     zombieList[i].Dispose();
                     zombSpeedList.RemoveAt(i);
                     zombieXList.RemoveAt(i);
-                    bulletX = this.Width;
+                    if (direction == "left")
+                    {
+                        bulletX = 0;
+                    }
+                    else
+                    {
+                        bulletX = this.Width;
+                    }
                     break;
                 }
                 if (heroBox.Bounds.IntersectsWith(zombieList[i].Bounds))
