@@ -23,7 +23,7 @@ namespace GameTemplateTest
         private void easyButton_Click(object sender, EventArgs e)
         {
             MainForm.levelDifficult = "Easy";
-            MainForm.zombCount = 1;
+            MainForm.zombCount = 8;
             MainForm.ChangeScreen(this, "GameScreen");
         }
         private void mediumButton_Click(object sender, EventArgs e)
